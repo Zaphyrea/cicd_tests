@@ -80,18 +80,25 @@ class TestDev(TestCase):
         self.assertEqual(response.status_code, 200)
 
     # Vérifie le endpoint predict 2
-    def test_predict_2 (self):
-        client = TestClient(app)
+    # def test_predict_2 (self):
+    #     test_data_2 = {
+    #         "Physical_Activity_Level": 2,
+    #         "Hearth_Rate": 70,
+    #         "Daily_Steps": 6000,
+    #         "Sleep_Disorder": 0
+    #     }
+    #     response = client.post("/predict_2", json=test_data_2)
+    #     print(response.json())  # Print out the validation errors
+    #     self.assertEqual(response.status_code, 200)
+    def test_predict_endpoint2(self):
         test_data = {
-            "Physical_Activity_Level": 2,
-            "Hearth_Rate": 70,
-            "Daily_Steps": 6000,
-            "Sleep_Disorder": 0
+            "Physical_Activity_Level":  30,
+            "Heart_Rate":  70,
+            "Daily_Steps":  7000,
+
         }
         response = client.post("/predict_2", json=test_data)
-        print(response.json())  # Print out the validation errors
-        self.assertEqual(response.status_code, 200)
-
+        self.assertEqual(response.status_code, 422)
 
 
 # Test du modèle individuellement

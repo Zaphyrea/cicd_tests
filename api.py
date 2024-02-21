@@ -119,27 +119,35 @@ class Credit_2(BaseModel):
        Daily_Steps : int
        Sleep_Disorder : int  # It's the target variable
 
+# # Point de terminaison : Prédiction 2
+# @app.post("/predict_2", tags=["Predict V2"])
+# def predict_2(credit_2: Credit_2):
+#     data = dict(credit_2)
+#     data = {
+#         'Physical Activity Level': data['Physical_Activity_Level'],
+#         'Heart Rate': data['Heart_Rate'],
+#         'Daily Steps': data['Daily_Steps'],
+#     }
+#     data_df = pd.DataFrame([data])
+#     prediction_2 = model_2.predict(data_df)
+
+#     # Convertir le résultat de la prédiction en un type Python natif (dict, liste, int, float, str, etc.)
+#     prediction_2 = prediction_2[0].item()
+
+#     # Sauvegarder la prédiction dans un fichier pour garder un historique 
+#     with open('predictions_model_2.txt', 'a') as f:
+#         f.write(str(prediction_2) + '\n')
+
+#     return {"prediction": prediction_2}
 # Point de terminaison : Prédiction 2
 @app.post("/predict_2", tags=["Predict V2"])
-def predict_2(credit_2: Credit_2):
-    data = dict(credit_2)
-    data = {
-        'Physical Activity Level': data['Physical_Activity_Level'],
-        'Heart Rate': data['Heart_Rate'],
-        'Daily Steps': data['Daily_Steps'],
-    }
-    data_df = pd.DataFrame([data])
-    prediction_2 = model_2.predict(data_df)
-
-    # Convertir le résultat de la prédiction en un type Python natif (dict, liste, int, float, str, etc.)
-    prediction_2 = prediction_2[0].item()
-
-    # Sauvegarder la prédiction dans un fichier pour garder un historique 
-    with open('predictions_model_2.txt', 'a') as f:
-        f.write(str(prediction_2) + '\n')
-
-    return {"prediction": prediction_2}
-
+def predict_2(credit: Credit):
+   
+    Z_new = [[credit.Physical_Activity_Level,
+              credit.Heart_Rate, credit.Daily_Steps,]]
+   
+    prediction_result = model_2.predict(Z_new)
+    return {"prediction": prediction_result.tolist()}
 
 # Démarrage de l'application
 if __name__ == "__main__":
