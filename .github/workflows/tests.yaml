@@ -1,0 +1,9 @@
+name : Python workflow tests
+
+on : [push, pull_request]
+
+jobs : 
+    job_1 :
+        runs-on: ubuntu-latest
+        
+
