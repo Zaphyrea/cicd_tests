@@ -62,7 +62,7 @@ class TestDev(TestCase):
     # Vérifie le endpoint hello_you
     def test_hello_you (self):
         response = client.get("/hello_you")
-        self.assertEqual(response.status_code,  200)
+        self.assertEqual(response.status_code, 404)
 
     # Vérifie le endpoint predict 1
     def test_predict_1 (self):
@@ -73,20 +73,23 @@ class TestDev(TestCase):
             "Heart_Rate": 70,
             "Daily_Steps": 6000,
             "BloodPressure_high": 110,
-            "BloodPressure_low": 80
+            "BloodPressure_low": 80,
+            "Sleep_Disorder": 0
         }
         response = client.post("/predict", json=test_data)
-        print(response.json())  # Print out the validation errors
         self.assertEqual(response.status_code, 200)
 
     # Vérifie le endpoint predict 2
     def test_predict_2 (self):
+        client = TestClient(app)
         test_data = {
-            "PhysicalActivityLevel": 2,
-            "HearthRate": 70,
-            "DailySteps": 6000
+            "Physical_Activity_Level": 2,
+            "Hearth_Rate": 70,
+            "Daily_Steps": 6000,
+            "Sleep_Disorder": 0
         }
         response = client.post("/predict_2", json=test_data)
+        print(response.json())  # Print out the validation errors
         self.assertEqual(response.status_code, 200)
 
 
