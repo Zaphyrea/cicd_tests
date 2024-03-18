@@ -95,7 +95,6 @@ class TestDev(TestCase):
             "Physical_Activity_Level":  30,
             "Heart_Rate":  70,
             "Daily_Steps":  7000,
-
         }
         response = client.post("/predict_2", json=test_data)
         self.assertEqual(response.status_code, 422)
