@@ -2,4 +2,4 @@ Aide/*
 *.pptx
 .venv
 .~lock.Presentation.pptx#
-mlflow_try
+mlflow_try/*
