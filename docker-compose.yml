@@ -1,13 +1,13 @@
-version :'3'
+version: '3'
 
 services:
   dockerserver:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     container_name: dockercicd
     ports:
-      - "8080:8080"
+      - "5000:5000"
+    restart: always
     volumes:
       - .:/app
-
